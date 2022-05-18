@@ -1,11 +1,15 @@
 import * as React from "react";
-import { View, Text} from 'react-native';
+import { View, Text } from 'react-native';
+
+import {OlhoExterno} from './styles'
 
 function Login() {
 
   return (
 
-    <View><Text>Login</Text></View>
+    <View>
+        <OlhoExterno />
+    </View>
 
   );
 }

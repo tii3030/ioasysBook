@@ -1,7 +1,8 @@
 import React from 'react';
 import Routes from './components/screens/routes/routes';
+import { NavigationContainer } from '@react-navigation/native';
 
-const App: () => Node = () => {
+const App = () => {
 
   // const isDarkMode = useColorScheme() === 'dark';
 
@@ -10,7 +11,9 @@ const App: () => Node = () => {
   // };
 
   return (
-    <Routes />
+        <NavigationContainer>
+            <Routes />
+        </NavigationContainer>
   );
 
 };
