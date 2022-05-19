@@ -1,51 +1,68 @@
-import React, {useState} from "react";
-import { View, SafeAreaView, TextInput, StyleSheet, Dimensions } from 'react-native';
-
-import {OlhoExterno} from './styles'
+import React, { useState, useRef } from "react";
+import { View, Dimensions, TextInput } from 'react-native';
+import { Container, Background, Card, Header, Books, Logo, Input, Label, Button, Text } from './styles'
+import { getToken } from '../../service/login_request';
 
 function Login() {
 
-  const [value, setValue] = useState('');
-  var width = Dimensions.get('window').width;
+    interface Login {
+        email: string,
+        password: string,
+    }
 
-  return (
+    const [login, setLogin] = useState<Login>({
+        email: '',
+        password: '',
+    });
 
-    <View style={styles.container}>
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={setValue}
-          value={value}
-        />
-        <TextInput
-          style={styles.input}
-          // onChangeText={onChangeNumber}
-          value={value}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
-        />
-      </SafeAreaView>
-    </View>
+    return (
+        <Container>
+            <Background source={require('./background.jpg')}>
+                
+                <Card>
+                    <Header>
+                        <Logo source={require('./logo.png')} resizeMode='contain' />
+                        <Books>Books</Books>                    
+                    </Header>
 
+                    <View>
+                        <Label>Email</Label>
+                        <Input 
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            onChangeText={(email) => setLogin({...login, email: email})}
+                            value={(login.email)}
+                            accessibilityLabel={ 'Email' }
+                            autoCompleteType="email"
+                            keyboardType="email-address"
+                            returnKeyType="next"
+                            style={{marginBottom: 16}}
+                        />
+                    </View>
+
+                    <View>
+                        <Label>Senha</Label>
+                        <Input
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry
+                            onChangeText={(password) => setLogin({...login, password: password})}
+                            value={login.password}
+                            accessibilityLabel={ 'Senha' }
+                            autoCompleteType="password"
+                            returnKeyType="done"
+                        />
+                        <Button
+                            accessibilityLabel={ "Entrar" }
+                            onPress={() => console.log(login)}
+                        >
+                            <Text>Entrar</Text>
+                        </Button>
+                    </View>
+                </Card>
+        </Background>    
+    </Container>
   );
 }
 
 export default Login;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#FF6666',
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20
-  },
-  input: {
-    height: 10,
-    margin: 12,
-    flex: 2,
-
-    borderWidth: 1,
-    padding: 10,
-  },
-});
