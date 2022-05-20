@@ -1,7 +1,11 @@
-import React, { useState, useRef } from "react";
-import { View, Dimensions, TextInput } from 'react-native';
+import React, { useState } from "react";
+import { View } from 'react-native';
 import { Container, Background, Card, Header, Books, Logo, Input, Label, Button, Text } from './styles'
 import { getToken } from '../../service/login_request';
+import store from "../../redux/store/store";
+import { add } from "../../redux/reducers/addUser";
+import {useNavigation} from '@react-navigation/native';
+import {HomeScreenProp} from '../routes/typesScreen';
 
 function Login() {
 
@@ -14,6 +18,17 @@ function Login() {
         email: '',
         password: '',
     });
+
+    const navigation = useNavigation<HomeScreenProp>();
+
+    async function submit() {
+        let value = await getToken(login);
+        store.dispatch(add(login));
+        console.log(value);
+        navigation.navigate('Home');
+    }
+
+
 
     return (
         <Container>
@@ -54,7 +69,7 @@ function Login() {
                         />
                         <Button
                             accessibilityLabel={ "Entrar" }
-                            onPress={() => console.log(login)}
+                            onPress={() => submit()}
                         >
                             <Text>Entrar</Text>
                         </Button>

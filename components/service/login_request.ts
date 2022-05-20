@@ -1,6 +1,8 @@
-export function getToken(login: object) : string {
+export async function getToken(login: object) : Promise<any> {
 
-    fetch('https://bi.eletrosom.com/api/authentication/', {
+    let resp: {} = {};
+    
+    await fetch('https://books.ioasys.com.br/api/v1/auth/sign-in', {
         method: 'POST',
         mode: 'no-cors', // DISABLE CORS
         headers: {
@@ -9,15 +11,15 @@ export function getToken(login: object) : string {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            codigo: '123',
-            senha: '123'
+            email: "desafio@ioasys.com.br",
+            password: "12341234"
         })
     })
     .then(response => response.json())
     .then((response) => {
-        console.log(response);
+        resp = response;
     })
     .catch(err => console.log(err))
 
-    return "token";
+    return resp;
 }

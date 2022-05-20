@@ -2,13 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../login/login';
 import Home from '../home/home';
+import { RootStackParamList } from './rootList';
 
 const RootStack = createStackNavigator<RootStackParamList>();
-
-type RootStackParamList = {
-    Login: undefined;
-    Home: undefined;
-};
 
 export default function Routes() {
     return (

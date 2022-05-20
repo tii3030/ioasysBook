@@ -1,8 +1,4 @@
-export const addPromotion = (data: object) => ({
-    type: 'ADD_PROMOTION',
+export const addUser = (data: object) => ({
+    type: 'ADD_USER',
     data
 })
-  
-export const clearPromotions = {
-    type: 'CLEAR_PROMOTIONS'
-}
