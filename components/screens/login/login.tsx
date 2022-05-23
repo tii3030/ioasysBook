@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Container, Background, Card, Header, Books, Logo, Input, Label, Button, Text } from './styles'
 import { getToken } from '../../service/login_request';
 import { useAppDispatch } from '../../redux/hooks_store/hooks'
-
+import images from "../../../assets/images"; 
 import { add } from "../../redux/reducers/addUser";
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenProp} from '../routes/typesScreen';
@@ -31,10 +31,10 @@ function Login() {
 
     return (
         <Container>
-            <Background source={require('./background.jpg')}>
+            <Background source={images.background}>
                 <Card>
                     <Header>
-                        <Logo source={require('./logo.png')} resizeMode='contain' />
+                        <Logo source={images.logo_login} resizeMode='contain' />
                         <Books>Books</Books>                    
                     </Header>
 

@@ -28,6 +28,7 @@ import {
 import Cards from '../../card_book/card_book';
 import { Fetch_Books } from '../../service/get_books';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
+import images from "../../../assets/images";
 
 function Home() {
 
@@ -96,7 +97,7 @@ function Home() {
               <Header_Modal>
                 <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                   <Close>
-                    <Img_Close source={require("./close.png")} />
+                    <Img_Close source={images.close_icon} />
                   </Close>  
                 </TouchableOpacity>   
               </Header_Modal>
@@ -132,12 +133,12 @@ function Home() {
       <Container>
 
         <Header>
-          <Logo source={require('./logo.png')} resizeMode='contain' />
+          <Logo source={images.logo} resizeMode='contain' />
           <Books>Books</Books>
 
           <TouchableOpacity>
             <Logout>
-              <Image source={require("./logout.png")} style={{alignSelf: 'center', height: 16, width: 16}}></Image>  
+              <Image source={images.logout_icon} style={{alignSelf: 'center', height: 16, width: 16}}></Image>  
             </Logout>  
           </TouchableOpacity>    
                    
@@ -156,12 +157,12 @@ function Home() {
                 placeholderTextColor="rgba(51, 51, 51, 0.2)" 
               />
               <Button_Search>
-                <Img_Search source={require("./search.png")} />
+                <Img_Search source={images.search_icon}/>
               </Button_Search>
           </View>
 
             <Button_Preferences onPress={() => setModalVisible(!modalVisible)}>
-              <Img_Preferences source={require("./preferences.png")} /> 
+              <Img_Preferences source={images.preferences_icon} /> 
             </Button_Preferences>
 
         </Container_Search>

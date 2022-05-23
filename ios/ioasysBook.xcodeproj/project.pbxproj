@@ -23,6 +23,7 @@
 		28741D1FE2E34F0C81FC0891 /* Heebo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69119AC6EA0B495CBBBF36B9 /* Heebo-Regular.ttf */; };
 		C3040C25B2FA490E840E3011 /* Heebo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 355AD17263334F8184E9A58B /* Heebo-SemiBold.ttf */; };
 		D2E2F88923C54E14BD3C6B52 /* Heebo-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C4A791FF88B4CD9B5BDC3AD /* Heebo-Thin.ttf */; };
+		6CB4D3BAA18D4D899FE03552 /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 79045659C01746BFA13E1710 /* preferences.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		69119AC6EA0B495CBBBF36B9 /* Heebo-Regular.ttf */ = {isa = PBXFileReference; name = "Heebo-Regular.ttf"; path = "../assets/fonts/Heebo-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		355AD17263334F8184E9A58B /* Heebo-SemiBold.ttf */ = {isa = PBXFileReference; name = "Heebo-SemiBold.ttf"; path = "../assets/fonts/Heebo-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3C4A791FF88B4CD9B5BDC3AD /* Heebo-Thin.ttf */ = {isa = PBXFileReference; name = "Heebo-Thin.ttf"; path = "../assets/fonts/Heebo-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		79045659C01746BFA13E1710 /* preferences.png */ = {isa = PBXFileReference; name = "preferences.png"; path = "../assets/images/preferences.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				69119AC6EA0B495CBBBF36B9 /* Heebo-Regular.ttf */,
 				355AD17263334F8184E9A58B /* Heebo-SemiBold.ttf */,
 				3C4A791FF88B4CD9B5BDC3AD /* Heebo-Thin.ttf */,
+				79045659C01746BFA13E1710 /* preferences.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				28741D1FE2E34F0C81FC0891 /* Heebo-Regular.ttf in Resources */,
 				C3040C25B2FA490E840E3011 /* Heebo-SemiBold.ttf in Resources */,
 				D2E2F88923C54E14BD3C6B52 /* Heebo-Thin.ttf in Resources */,
+				6CB4D3BAA18D4D899FE03552 /* preferences.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
