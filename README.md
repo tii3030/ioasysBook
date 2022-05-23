@@ -3,7 +3,7 @@
 <h1 align="center"> IOASYS BOOK </h1>
 <p align="justify"> Este aplicativo é uma biblioteca de Livros </p>
 <p align="justify"> O APP foi desenvolvido com o Framework React Native e a Linguagem Typescript e possui algumas funcionalidades que simulam uma Biblioteca Virtual</p>
-<img src="https://raw.githubusercontent.com/tii3030/Fast-Food/main/Screenshot.png"></img>
+<img src="https://raw.githubusercontent.com/tii3030/ioasysBook/main/Screeshot.png?token=GHSAT0AAAAAABU3KGP6JZMMKV766DSM4X6MYULYEOA"></img>
 
 
 > Status do Projeto: Em desenvolvimento :warning:
