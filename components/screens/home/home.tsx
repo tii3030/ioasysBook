@@ -33,7 +33,7 @@ import images from "../../../assets/images";
 function Home() {
 
   // TOKEN GET REQUEST HEADER AUTHORIZATION
-  const token = useAppSelector((state) => state.userKey.value)
+  const token = useAppSelector((state) => state.userToken.value)
 
   const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
