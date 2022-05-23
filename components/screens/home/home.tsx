@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { View, Image, ScrollView, Modal, TouchableOpacity } from 'react-native';
 import {
   Container,
   Header,
@@ -45,19 +45,39 @@ function Home() {
     await Fetch_Books(token, category).then(value => setData(value.data));
   }
 
-  const [biographies, setBiographies] = useState(false);
-  const [manuscripts, setManuscripts] = useState(false);
-  const [poetry, setPoetry] = useState(false);
-  const [humor, setHumor] = useState(false);
-  const [games, setGames] = useState(false);
-  const [scienceFiction, setScienceFiction] = useState(false);
-
   const [category, setCategory] = useState('');
 
   function filter() {
     setModalVisible(!modalVisible);
     getBooks(category);
   }
+
+  type State = {
+    biographies: boolean,
+    manuscripts: boolean,
+    poetry: boolean,
+    humor: boolean,
+    games: boolean,
+    scienceFiction: boolean,
+  }
+
+  const initial_value: State = {
+    biographies: false,
+    manuscripts: false,
+    poetry: false,
+    humor: false,
+    games: false,
+    scienceFiction: false,
+  }
+
+  const [stateBtn, setStateBtn] = useState<State>({
+    biographies: false,
+    manuscripts: false,
+    poetry: false,
+    humor: false,
+    games: false,
+    scienceFiction: false
+  });
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -84,12 +104,12 @@ function Home() {
               <Text_Select>Selecione a categoria</Text_Select>
               
               <Button_Container>
-                <TouchableOpacity onPress={()=> {setBiographies(!biographies), setCategory('biographies')}}><Button_Category style={{backgroundColor: biographies ? "#333333" : "#FFF"}}><Text_Category style={{color: biographies ? "#FFF" : "#333333"}}>Biografias</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setManuscripts(!manuscripts), setCategory('manuscripts')}}><Button_Category style={{backgroundColor: manuscripts ? "#333333" : "#FFF"}}><Text_Category style={{color: manuscripts ? "#FFF" : "#333333"}}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setPoetry(!poetry), setCategory('poetry')}}><Button_Category style={{backgroundColor: poetry ? "#333333" : "#FFF"}}><Text_Category style={{color: poetry ? "#FFF" : "#333333"}}>Poesia</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setHumor(!humor), setCategory('humor')}}><Button_Category style={{backgroundColor: humor ? "#333333" : "#FFF"}}><Text_Category style={{color: humor ? "#FFF" : "#333333"}}>Humor</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setGames(!games), setCategory('games')}}><Button_Category style={{backgroundColor: games ? "#333333" : "#FFF"}}><Text_Category style={{color: games ? "#FFF" : "#333333"}}>Games</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setScienceFiction(!scienceFiction), setCategory('scienceFiction')}}><Button_Category style={{backgroundColor: scienceFiction ? "#333333" : "#FFF"}}><Text_Category style={{color: scienceFiction ? "#FFF" : "#333333"}}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, biographies: !stateBtn.biographies}), setCategory('biographies')}}><Button_Category selected={stateBtn.biographies}><Text_Category selected={stateBtn.biographies}>Biografias</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, manuscripts: !stateBtn.manuscripts}), setCategory('manuscripts')}}><Button_Category selected={stateBtn.manuscripts}><Text_Category selected={stateBtn.manuscripts}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, poetry: !stateBtn.poetry}), setCategory('poetry')}}><Button_Category selected={stateBtn.poetry}><Text_Category selected={stateBtn.poetry}>Poesia</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, humor: !stateBtn.humor}), setCategory('humor')}}><Button_Category selected={stateBtn.humor}><Text_Category selected={stateBtn.humor}>Humor</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, games: !stateBtn.games}), setCategory('games')}}><Button_Category selected={stateBtn.games}><Text_Category selected={stateBtn.games}>Games</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, scienceFiction: !stateBtn.scienceFiction}), setCategory('scienceFiction')}}><Button_Category selected={stateBtn.scienceFiction}><Text_Category selected={stateBtn.scienceFiction}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
               </Button_Container>
 
               <Text_Select>Selecione o ano</Text_Select>

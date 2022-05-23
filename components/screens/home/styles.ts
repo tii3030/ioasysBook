@@ -133,7 +133,7 @@ export const Img_Close = styled.Image`
     width: 12px;
 `;
 
-export const Button_Category = styled.View`
+export const Button_Category = styled.View<{ selected?: boolean }>`
     height: 32px;
     border: 1px solid rgba(51, 51, 51, 0.3);
     border-radius: 44px;
@@ -141,14 +141,15 @@ export const Button_Category = styled.View`
     align-self: center;
     justify-content: center;
     margin-bottom: 8px;
-    margin-right: 8px
+    margin-right: 8px;
+    background: ${(props) => props.selected ? "#333333" : "#FFFFFF"};
 `;
 
-export const Text_Category = styled.Text`
+export const Text_Category = styled.Text<{ selected?: boolean }>`
     font-family: Heebo-Regular;
     font-style: normal;
     font-size: 12px;
-    color: #333333;
+    color: ${(props) => props.selected ? "#FFFFFF" : "#333333"};
     margin-left: 10px;
     margin-right: 10px;
 `;
