@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import addUser from  '../reducers/addUser';
+import addToken from  '../reducers/addUser';
+import addBook from  '../reducers/addBooks';
 
 export const store = configureStore({
     reducer: {
-        userKey: addUser,
+        userToken: addToken,
+        books: addBook,
+
     },
 })
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch

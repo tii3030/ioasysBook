@@ -10,7 +10,7 @@ const initialState: UserState = {
 }
 
 export const userSlice = createSlice({
-  name: 'addUser',
+  name: 'addToken',
   initialState,
   reducers: {
         add: (state, action: PayloadAction<string>) => {
@@ -21,5 +21,5 @@ export const userSlice = createSlice({
 
 export const { add } = userSlice.actions
 
-export const selectUser = (state: RootState) => state.userKey.value
+export const selectUser = (state: RootState) => state.userToken.value
 export default userSlice.reducer
