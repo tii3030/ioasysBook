@@ -1,8 +1,8 @@
-**TESTE DESENVOLVEDOR FULL STACK DEVIO**
+**DESAFIO IOASYS BOOK**
 
-<h1 align="center"> FAST FOOD </h1>
-<p align="justify"> Esta aplicação simula um sistema de pedidos de um Fast Food </p>
-<p align="justify"> O sistema foi desenvolvido de forma distribuída, tornado sua visualização (front-end), desacoplada das regras de negócios (back-end), além de aumentar a segurança, escalabilidade, e reutilização </p>
+<h1 align="center"> IOASYS BOOK </h1>
+<p align="justify"> Este aplicativo é uma biblioteca de Livros </p>
+<p align="justify"> O APP foi desenvolvido com o Framework React Native e a Linguagem Typescript e possui algumas funcionalidades que simulam uma Biblioteca Virtual</p>
 <img src="https://raw.githubusercontent.com/tii3030/Fast-Food/main/Screenshot.png"></img>
 
 
@@ -10,18 +10,21 @@
 
 ## Linguagens e libs utilizadas :books:
 
-- [React](https://pt-br.reactjs.org/): versão 18.1.0
-- [PHP](https://www.php.net/): versão 7.4.29
-- [swoole](https://github.com/swoole/swoole-docs): versão 4.5.2
-- [mysql](https://www.php.net/): versão 8.0.25 for Linux on x86_64 (MySQL Community Server - GPL)
+- [React Native](https://reactnative.dev/docs/typescript): versão 0.68.2
+- [@react-navigation/native](https://reactnavigation.org/docs/typescript/): versão 6.0.10
+- [@react-navigation/stack](https://reactnavigation.org/docs/typescript/): versão 6.2.1
+- [react-redux](https://react-redux.js.org/): versão 8.0.2
+- [@reduxjs/toolkit](https://redux-toolkit.js.org/usage/usage-with-typescript): versão 1.8.1
+- [Styled Components](https://styled-components.com/docs/basics): 5.3.5
 
 
 ## Rodando a aplicação :arrow_forward:
 
 ```sh
-git clone https://github.com/tii3030/Fast-Food
-cd Fast-Food
+git clone https://github.com/tii3030/ioasysBook.git
+cd ioasysBook
 npm install
+npx react-native run-android
 npm start
 ```
 
@@ -30,11 +33,3 @@ npm start
 |name|email|
 | -------- | -------- |
 |Tiago Pereira|tiago.wy@outlook.com|
-
-
-## Caso de erro:
-<p align="justify"> Em caso do seu navegodor ser o Firefox e não rodar a aplicação acesse </p> [About Config](about:config)
-<p align="justify"> E altere o parâmetro network.websocket.allowInsecureFromHTTPS para true, para possibilitar a comunicação com o WebSocket. </p>
-
-<img src="https://raw.githubusercontent.com/tii3030/Fast-Food-Devio/main/Screenshot2.png"></img>
-
