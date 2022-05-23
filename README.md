@@ -2,7 +2,7 @@
 
 <h1 align="center"> IOASYS BOOK </h1>
 <p align="justify"> Este aplicativo é uma biblioteca de Livros </p>
-<p align="justify"> O APP foi desenvolvido com o Framework React Native e a Linguagem Typescript e possui algumas funcionalidades que simulam uma Biblioteca Virtual</p>
+<p align="justify"> O App foi desenvolvido com o framework React Native e a linguagem Typescript e possui algumas funcionalidades que simulam uma Biblioteca Virtual. Nesta mesma branch (main) há um compilação (.apk) para teste do app</p>
 <img src="https://raw.githubusercontent.com/tii3030/ioasysBook/main/Screeshot.png?token=GHSAT0AAAAAABU3KGP6JZMMKV766DSM4X6MYULYEOA"></img>
 
 
