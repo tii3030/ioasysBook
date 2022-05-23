@@ -28,30 +28,52 @@ import {
 import Cards from '../../card_book/card_book';
 import { Fetch_Books } from '../../service/get_books';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
+import { useAppDispatch } from '../../redux/hooks_store/hooks';
+import { addBook } from "../../redux/reducers/addBooks";
 import images from "../../../assets/images";
 
 function Home() {
-
-  // TOKEN GET REQUEST HEADER AUTHORIZATION
-  const token = useAppSelector((state) => state.userToken.value)
-
-  const [data, setData] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {    
     getBooks('');
   }, []);
 
+  const dispatch = useAppDispatch();
+
   async function getBooks(category?: string) {
-    await Fetch_Books(token, category).then(value => setData(value.data));
+    await Fetch_Books(token, category).then(value => {setData(value.data), dispatch(addBook(value.data))});
   }
 
-  const [category, setCategory] = useState('');
-
-  function filter() {
-    setModalVisible(!modalVisible);
-    getBooks(category);
+  type Book = {
+    authors: [],
+    category: string,
+    description: string,
+    id: string,
+    imageUrl: string,
+    isbn10: string,
+    isbn13: string,
+    language: string,
+    pageCount: number,
+    published: number,
+    publisher: string,
+    title: string
   }
+
+  const [stateBook, setStateBook] = useState<State>({
+    // authors: [],
+    // category: '',
+    // description: '',
+    // id: '',
+    // imageUrl: '',
+    // isbn10: '',
+    // isbn13: '',
+    // language: '',
+    // pageCount: 0,
+    // published: 0,
+    // publisher: '',
+    // title: ''
+  });
+
 
   type State = {
     biographies: boolean,
@@ -79,6 +101,19 @@ function Home() {
     games: false,
     scienceFiction: false
   });
+
+  // TOKEN GET REQUEST HEADER AUTHORIZATION
+  const token = useAppSelector((state) => state.userToken.value)
+
+  const [data, setData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [category, setCategory] = useState('');
+
+  function filter() {
+    setModalVisible(!modalVisible);
+    getBooks(category);
+  }
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

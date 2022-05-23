@@ -16,8 +16,8 @@ export async function getToken(login: Login) : Promise<any> {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            email: login.email,
-            password: login.password
+            email: 'desafio@ioasys.com.br',
+            password: '12341234'
         })
     })
     .then((response) => {

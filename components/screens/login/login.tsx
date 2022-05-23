@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { View } from 'react-native';
-import { Container, Background, Card, Header, Books, Logo, Input, Label, Button, Text } from './styles'
 import { getToken } from '../../service/login_request';
 import { useAppDispatch } from '../../redux/hooks_store/hooks'
 import images from "../../../assets/images"; 
 import { add } from "../../redux/reducers/addUser";
-import {useNavigation} from '@react-navigation/native';
-import {HomeScreenProp} from '../routes/typesScreen';
+import { useNavigation } from '@react-navigation/native';
+import { HomeScreenProp } from '../routes/typesScreen';
+import { 
+    Container,
+    Background,
+    Card,
+    Header,
+    Books,
+    Logo,
+    Input,
+    Label,
+    Button,
+    Text
+} from './styles';
 
 function Login() {
 
