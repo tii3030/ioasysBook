@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { View } from 'react-native';
 import { Container, Background, Card, Header, Books, Logo, Input, Label, Button, Text } from './styles'
 import { getToken } from '../../service/login_request';
-import store from "../../redux/store/store";
+import { useAppDispatch } from '../../redux/hooks_store/hooks'
+
 import { add } from "../../redux/reducers/addUser";
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenProp} from '../routes/typesScreen';
@@ -20,15 +21,13 @@ function Login() {
     });
 
     const navigation = useNavigation<HomeScreenProp>();
+    const dispatch = useAppDispatch();
 
     async function submit() {
         let value = await getToken(login);
-        store.dispatch(add(login));
-        console.log(value);
+        dispatch(add(value));
         navigation.navigate('Home');
     }
-
-
 
     return (
         <Container>

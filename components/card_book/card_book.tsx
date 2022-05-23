@@ -4,13 +4,14 @@ import { Card, Img_Book, Descr, Title, Author, Info } from './styles';
 import { DetailsBook } from "../service/detailsBook";
 import { useNavigation } from '@react-navigation/native';
 import { DetailsScreenProp } from '../screens/routes/typesScreen';
+import { useAppSelector } from '../redux/hooks_store/hooks';
 
 type PostsProps = {
   book: Container_Book;
 }
 
 interface Container_Book{
-  id?: string;
+  id: string;
   isbn10?: string;
   isbn13?: string;
   imageUrl?: string;
@@ -25,6 +26,9 @@ interface Container_Book{
 }
 
 function Cards({book}: PostsProps) {
+
+  // TOKEN GET REQUEST HEADER AUTHORIZATION
+  const token = useAppSelector((state) => state.userKey.value)
 
   const [book_data, setBook_data] = useState<Container_Book>({
     id: '',
@@ -46,7 +50,7 @@ function Cards({book}: PostsProps) {
   }, []);
 
   async function getDetailsBook() {
-    await DetailsBook().then(value => navigation.navigate('Details', { data: value }));
+    await DetailsBook(book_data.id, token).then(value => navigation.navigate('Details', { data: value }));
   }
 
   const navigation = useNavigation<DetailsScreenProp>();
@@ -75,7 +79,6 @@ function Cards({book}: PostsProps) {
 }
 
 export default Cards;
-
 
 const styles = StyleSheet.create({
   shadow:{

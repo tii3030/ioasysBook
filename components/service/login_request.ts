@@ -1,6 +1,11 @@
-export async function getToken(login: object) : Promise<any> {
+interface Login {
+    email: string,
+    password: string,
+}
 
-    let resp: {} = {};
+export async function getToken(login: Login) : Promise<any> {
+
+    let resp: string = '';
     
     await fetch('https://books.ioasys.com.br/api/v1/auth/sign-in', {
         method: 'POST',
@@ -11,14 +16,17 @@ export async function getToken(login: object) : Promise<any> {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            email: "desafio@ioasys.com.br",
-            password: "12341234"
+            email: login.email,
+            password: login.password
         })
     })
-    .then(response => response.json())
     .then((response) => {
-        resp = response;
+        resp = (response.headers.get('Authorization') || '');
     })
+    // .then(response => response.json())
+    // .then((response) => {
+    //     console.log(response);
+    // })
     .catch(err => console.log(err))
 
     return resp;

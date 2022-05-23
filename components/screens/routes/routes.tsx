@@ -11,7 +11,7 @@ const RootStack = createStackNavigator<RootStackParamList>();
 export default function Routes() {
     return (
         <RootStack.Navigator 
-            initialRouteName="Home"  
+            initialRouteName="Login"  
             screenOptions={{
                 headerShown: false
             }}
