@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { Container, Header, Logout, Img_Book, Title, Author, Info } from './styles';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from '@react-navigation/native';
+import images from "../../../assets/images";
 
 function Details({ route, navigation }: any) {
 
@@ -47,7 +48,7 @@ function Details({ route, navigation }: any) {
         <Header>
           <TouchableOpacity onPress={() => navigation.goBack()}>
           <Logout>
-            <Image source={require("./left-arrow.png")} style={{alignSelf: 'center', height: 16, width: 16}}></Image>  
+            <Image source={images.back} style={{alignSelf: 'center', height: 16, width: 16}}></Image>  
           </Logout>
           </TouchableOpacity> 
         </Header> 
