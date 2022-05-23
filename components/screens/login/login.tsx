@@ -33,7 +33,6 @@ function Login() {
     return (
         <Container>
             <Background source={require('./background.jpg')}>
-                
                 <Card>
                     <Header>
                         <Logo source={require('./logo.png')} resizeMode='contain' />
