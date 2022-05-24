@@ -41,39 +41,8 @@ function Home() {
   const dispatch = useAppDispatch();
 
   async function getBooks(category?: string) {
-    await Fetch_Books(token, category).then(value => {setData(value.data), dispatch(addBook(value.data))});
+    await Fetch_Books(token, category).then(value => {setData(value.data), dispatch(addBook(value.data[0]))});
   }
-
-  type Book = {
-    authors: [],
-    category: string,
-    description: string,
-    id: string,
-    imageUrl: string,
-    isbn10: string,
-    isbn13: string,
-    language: string,
-    pageCount: number,
-    published: number,
-    publisher: string,
-    title: string
-  }
-
-  const [stateBook, setStateBook] = useState<State>({
-    // authors: [],
-    // category: '',
-    // description: '',
-    // id: '',
-    // imageUrl: '',
-    // isbn10: '',
-    // isbn13: '',
-    // language: '',
-    // pageCount: 0,
-    // published: 0,
-    // publisher: '',
-    // title: ''
-  });
-
 
   type State = {
     biographies: boolean,
