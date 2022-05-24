@@ -20,6 +20,5 @@ export const userSlice = createSlice({
 })
 
 export const { add } = userSlice.actions
-
 export const selectUser = (state: RootState) => state.userToken.value
 export default userSlice.reducer

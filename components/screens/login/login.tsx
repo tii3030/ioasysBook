@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from 'react-native';
-import { getToken } from '../../service/login_request';
+import { getToken } from '../../services/login_request';
 import { useAppDispatch } from '../../redux/hooks_store/hooks'
 import images from "../../../assets/images"; 
 import { add } from "../../redux/reducers/addUser";

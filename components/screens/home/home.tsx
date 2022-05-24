@@ -26,23 +26,42 @@ import {
 
 } from './styles';
 import Cards from '../../card_book/card_book';
-import { Fetch_Books } from '../../service/get_books';
+import { Fetch_Books } from '../../services/get_books';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
 import { useAppDispatch } from '../../redux/hooks_store/hooks';
 import { addBook } from "../../redux/reducers/addBooks";
 import images from "../../../assets/images";
+import { FetchBooks } from '../../redux/actions/actions'
 
 function Home() {
 
-  useEffect(() => {    
-    getBooks('');
-  }, []);
-
   const dispatch = useAppDispatch();
 
-  async function getBooks(category?: string) {
-    await Fetch_Books(token, category).then(value => {setData(value.data), dispatch(addBook(value.data[0]))});
-  }
+  useEffect(() => {    
+    // getBooks('');
+    dispatch(FetchBooks('scs'));
+  }, []);
+
+  const books = useAppSelector((state) => state.books)
+
+  console.log(books)
+  
+  // async function getBooks(category?: string) {
+  //   await Fetch_Books(token, category)
+  //   .then(value => {
+  //     setData(value.data),
+
+  //     // STORE ALL BOOKS
+  //     (value.data).map((book: Object) => {
+  //       if(book) {
+  //         dispatch(addBook(book))
+  //       }
+  //     })
+  //   })
+  //   .then(() => {
+  //     // let token = useAppSelector((state) => state.books.book)
+  //   })
+  // }
 
   type State = {
     biographies: boolean,
@@ -81,7 +100,22 @@ function Home() {
 
   function filter() {
     setModalVisible(!modalVisible);
-    getBooks(category);
+    // getBooks(category);
+  }
+
+  interface Container_Book{
+    id?: string;
+    isbn10?: string;
+    isbn13?: string;
+    imageUrl?: string;
+    authors?: [];
+    title?: string
+    category?: string;
+    description?: string;
+    language?: string;
+    pageCount?: string;
+    published?: string;
+    publisher?: string;
   }
 
   return (
@@ -171,11 +205,11 @@ function Home() {
 
         </Container_Search>
 
-        {data?.map((value, index) => {
+        {/* {books?.map((value: Container_Book, index) => {
           return (
             <Cards key={index} book={value}/>
           );
-        })}
+        })} */}
 
       </Container>
     </ScrollView>

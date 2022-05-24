@@ -1,25 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store/store'
+// import { ModelBooks } from '../models/models';
 
-type BookState = {
-    book: {}
-}
+export type ModelBooks = ""
 
-const initialState: BookState = {
-    book: {}
-}
+const initialState: string = ""
 
 export const BookSlice = createSlice({
   name: 'addBook',
   initialState,
   reducers: {
-        addBook: (state, action: PayloadAction<BookState>) => {
-            state.book = action.payload
+        addBook: (state, action: PayloadAction<string>) => {
+            state = (action.payload)
         },
     },
 })
 
+export const selectBook = (state: RootState) => state.books
 export const { addBook } = BookSlice.actions
 
-export const selectBook = (state: RootState) => state.books.book
 export default BookSlice.reducer

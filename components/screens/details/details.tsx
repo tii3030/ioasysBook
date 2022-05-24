@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { Container, Header, Logout, Img_Book, Title, Author, Info } from './styles';
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from '@react-navigation/native';
 import images from "../../../assets/images";
+import { useAppSelector } from '../../redux/hooks_store/hooks';
 
 function Details({ route, navigation }: any) {
+
+  // TOKEN GET REQUEST HEADER AUTHORIZATION
+  const book = useAppSelector((state) => state.books.book)
+  console.log(book)
 
   interface Container_Detail{
     id?: string;
