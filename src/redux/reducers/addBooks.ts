@@ -3,22 +3,20 @@ import type { RootState } from '../store/store'
 import { ModelBooks } from '../../models/models';
 
 const initialState: ModelBooks = {
-    books: [
-		{
-			authors: [],
-			category: '',
-			description: '',
-			id: '',
-			imageUrl: '',
-			isbn10: '',
-			isbn13: '',
-			language: '',
-			pageCount: 0,
-			published: 0,
-			publisher: '',
-			title: ''
-		}
-    ]
+    books: [{
+		authors: [],
+		category: '',
+		description: '',
+		id: '',
+		imageUrl: '',
+		isbn10: '',
+		isbn13: '',
+		language: '',
+		pageCount: 0,
+		published: 0,
+		publisher: '',
+		title: ''
+	}]
 }
 
 export const BookSlice = createSlice({

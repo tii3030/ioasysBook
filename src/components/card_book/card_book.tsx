@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react"
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Card, Img_Book, Descr, Title, Author, Info } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { DetailsScreenProp } from '../screens/routes/typesScreen'
-import { Container_Book } from '../models/models'
-import { FetchBookId } from '../redux/actions/actions'
-import { useAppDispatch } from '../redux/hooks_store/hooks'
+import { DetailsScreenProp } from '../../screens/routes/typesScreen'
+import { Container_Book } from '../../models/models'
+import { FetchBookId } from '../../redux/actions/actions'
+import { useAppDispatch } from '../../redux/hooks_store/hooks'
 
 function Cards(props: { book: Container_Book }) {
 
