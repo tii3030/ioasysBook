@@ -8,8 +8,8 @@ export const submitLogin = async (login: LoginModel) => {
     return response;
 }
 
-export const getAllBooks = async (token: string) => {
-    let response = await getApiBooks(token);
+export const getAllBooks = async (token: string, category?: string) => {
+    let response = await getApiBooks(token, category);
     return response;
 }
 

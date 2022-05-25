@@ -1,10 +1,10 @@
 import { ModelBooks } from "../models/models";
 
-export async function getApiBooks(token: string){
+export async function getApiBooks(token: string, category?: string){
 
     let resp: ModelBooks = { books: [{}] };
 
-    await fetch('https://books.ioasys.com.br/api/v1/books?page=1&amount=25', {
+    await fetch('https://books.ioasys.com.br/api/v1/books?page=1&amount=25&category=' + (!(category === undefined) ? category : ''), {
         method: 'GET',
         mode: 'no-cors', // DISABLE CORS
         headers: {

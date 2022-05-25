@@ -5,36 +5,17 @@ import Cards from '../../card_book/card_book';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
 import { useAppDispatch } from '../../redux/hooks_store/hooks';
 import images from "../../../assets/images";
-import { ModelBooks, ModelCategory, Container_Book } from '../../models/models'
+import { ModelCategory, Container_Book } from '../../models/models'
+import { FetchBooks } from "../../redux/actions/actions";
 
 function Home() {
 
-  // useEffect(() => {    
-
-  // }, []);
-
-  // const users = useAppSelector((state) => state.user)
-  // console.log(users)
-
   const books = useAppSelector((state) => state.books)
 
-  // async function getBooks(category?: string) {
-  //   await Fetch_Books(token, category)
-  //   .then(value => {
-  //     setData(value.data),
-
-  //     // STORE ALL BOOKS
-  //     (value.data).map((book: Object) => {
-  //       if(book) {
-  //         dispatch(addBook(book))
-  //       }
-  //     })
-  //   })
-  //   .then(() => {
-  //     // let token = useAppSelector((state) => state.books.book)
-  //   })
-  // }
-
+  useEffect(() => {    
+    setLoading(false)
+  }, [books]);
+  
   const initial_value: ModelCategory = {
     biographies: false,
     manuscripts: false,
@@ -53,14 +34,22 @@ function Home() {
     scienceFiction: false
   });
 
+  const [isLoading, setLoading] = useState(false)
+
   const [modalVisible, setModalVisible] = useState(false);
-
   const [category, setCategory] = useState('');
+  const dispatch = useAppDispatch();
 
-  function filter() {
+  async function filter() {
+    setLoading(true)
     setModalVisible(!modalVisible);
-    // getBooks(category);
-  }
+
+    try{
+      await dispatch(FetchBooks(category));
+    } catch(error) {
+      console.log("Error")
+    }
+}
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -149,15 +138,15 @@ function Home() {
 
         </Container_Search>
 
-        {books ?
-
+        {
+          !isLoading ?
           books.books?.map((value: Container_Book, index) => {
             return (
               <Cards key={index} book={value}/>
             );
           })
-
-        : null}
+          : null
+        }
 
       </Container>
     </ScrollView>
