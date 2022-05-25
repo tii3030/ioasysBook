@@ -5,7 +5,7 @@ import Cards from '../../card_book/card_book';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
 import { useAppDispatch } from '../../redux/hooks_store/hooks';
 import images from "../../../assets/images";
-import { ModelCategory, Container_Book } from '../../models/models'
+import { ModelCategory, ModelYear, Container_Book } from '../../models/models'
 import { FetchBooks } from "../../redux/actions/actions";
 
 function Home() {
@@ -16,7 +16,7 @@ function Home() {
     setLoading(false)
   }, [books]);
   
-  const initial_value: ModelCategory = {
+  const init_cat: ModelCategory = {
     biographies: false,
     manuscripts: false,
     poetry: false,
@@ -31,12 +31,24 @@ function Home() {
     poetry: false,
     humor: false,
     games: false,
-    scienceFiction: false
+    scienceFiction: false,
+  });
+
+  const [stateYear, setStateYear] = useState<ModelYear>({
+    y2015: false,
+    y2016: false,
+    y2017: false,
+    y2018: false,
+    y2019: false,
+    y2020: false,
+    y2021: false
   });
 
   const [isLoading, setLoading] = useState(true)
   const [modalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState('');
+
+  const [year, setYear] = useState<number[]>([]);
   const dispatch = useAppDispatch();
 
   async function filter() {
@@ -56,8 +68,24 @@ function Home() {
         console.log("Error")
       }
     }
+  }
 
-}
+  function changeYear(value: number) {
+
+    let arr: number[] = year;
+
+    if (arr.indexOf(value) >= 0) {
+      arr.splice(arr.indexOf(value), 1);
+    } else {
+      arr.push(value);
+    }
+
+    setYear(arr)
+  }
+
+  function BooksYear() {
+    // console.log(books.books)
+  }
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -84,24 +112,24 @@ function Home() {
               <Text_Select>Selecione a categoria</Text_Select>
               
               <Button_Container>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, biographies: !stateBtn.biographies}), !stateBtn.biographies ? setCategory('biographies') : setCategory('')}}><Button_Category selected={stateBtn.biographies}><Text_Category selected={stateBtn.biographies}>Biografias</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, manuscripts: !stateBtn.manuscripts}), !stateBtn.manuscripts ? setCategory('manuscripts') : setCategory('')}}><Button_Category selected={stateBtn.manuscripts}><Text_Category selected={stateBtn.manuscripts}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, poetry: !stateBtn.poetry}), !stateBtn.poetry ? setCategory('poetry') : setCategory('')}}><Button_Category selected={stateBtn.poetry}><Text_Category selected={stateBtn.poetry}>Poesia</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, humor: !stateBtn.humor}), !stateBtn.humor ? setCategory('humor') : setCategory('')}}><Button_Category selected={stateBtn.humor}><Text_Category selected={stateBtn.humor}>Humor</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, games: !stateBtn.games}), !stateBtn.games ? setCategory('games') : setCategory('')}}><Button_Category selected={stateBtn.games}><Text_Category selected={stateBtn.games}>Games</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, scienceFiction: !stateBtn.scienceFiction}), !stateBtn.scienceFiction ? setCategory('scienceFiction') : setCategory('')}}><Button_Category selected={stateBtn.scienceFiction}><Text_Category selected={stateBtn.scienceFiction}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, biographies: !stateBtn.biographies}), !stateBtn.biographies ? setCategory('biographies') : setCategory('')}}><Button_Category selected={stateBtn.biographies}><Text_Category selected={stateBtn.biographies}>Biografias</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, manuscripts: !stateBtn.manuscripts}), !stateBtn.manuscripts ? setCategory('manuscripts') : setCategory('')}}><Button_Category selected={stateBtn.manuscripts}><Text_Category selected={stateBtn.manuscripts}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, poetry: !stateBtn.poetry}), !stateBtn.poetry ? setCategory('poetry') : setCategory('')}}><Button_Category selected={stateBtn.poetry}><Text_Category selected={stateBtn.poetry}>Poesia</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, humor: !stateBtn.humor}), !stateBtn.humor ? setCategory('humor') : setCategory('')}}><Button_Category selected={stateBtn.humor}><Text_Category selected={stateBtn.humor}>Humor</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, games: !stateBtn.games}), !stateBtn.games ? setCategory('games') : setCategory('')}}><Button_Category selected={stateBtn.games}><Text_Category selected={stateBtn.games}>Games</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...init_cat, scienceFiction: !stateBtn.scienceFiction}), !stateBtn.scienceFiction ? setCategory('scienceFiction') : setCategory('')}}><Button_Category selected={stateBtn.scienceFiction}><Text_Category selected={stateBtn.scienceFiction}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
               </Button_Container>
 
               <Text_Select>Selecione o ano</Text_Select>
 
               <Button_Container>
-                <Button_Category><Text_Category>2015</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2016</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2017</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2018</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2019</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2020</Text_Category></Button_Category>
-                <Button_Category><Text_Category>2021</Text_Category></Button_Category>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2015: !stateYear.y2015}), changeYear(2015)}}><Button_Category selected={stateYear.y2015}><Text_Category selected={stateYear.y2015}>2015</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2016: !stateYear.y2016}), changeYear(2016)}}><Button_Category selected={stateYear.y2016}><Text_Category selected={stateYear.y2016}>2016</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2017: !stateYear.y2017}), changeYear(2017)}}><Button_Category selected={stateYear.y2017}><Text_Category selected={stateYear.y2017}>2017</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2018: !stateYear.y2018}), changeYear(2018)}}><Button_Category selected={stateYear.y2018}><Text_Category selected={stateYear.y2018}>2018</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2019: !stateYear.y2019}), changeYear(2019)}}><Button_Category selected={stateYear.y2019}><Text_Category selected={stateYear.y2019}>2019</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2020: !stateYear.y2020}), changeYear(2020)}}><Button_Category selected={stateYear.y2020}><Text_Category selected={stateYear.y2020}>2020</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateYear({...stateYear, y2021: !stateYear.y2021}), changeYear(2021)}}><Button_Category selected={stateYear.y2021}><Text_Category selected={stateYear.y2021}>2021</Text_Category></Button_Category></TouchableOpacity>
               </Button_Container>
 
               <Filtrar onPress={()=> filter()}><Text_Filter>Filtrar</Text_Filter></Filtrar>

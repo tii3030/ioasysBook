@@ -57,6 +57,16 @@ export interface ModelCategory {
     scienceFiction: boolean,
 }
 
+export interface ModelYear {
+    y2015: boolean,
+    y2016: boolean,
+    y2017: boolean,
+    y2018: boolean,
+    y2019: boolean,
+    y2020: boolean,
+    y2021: boolean
+}
+
 export interface ModelBookId {
     book:  {
         authors?: [],
