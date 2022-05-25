@@ -22,8 +22,8 @@ export async function getApiLogin(login: LoginModel) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            email: 'desafio@ioasys.com.br',
-            password: '12341234'
+            email: login.email,
+            password: login.password
         })
     })
 

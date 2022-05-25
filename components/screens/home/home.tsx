@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Image, ScrollView, Modal, TouchableOpacity } from 'react-native';
+import { View, Image, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Container, Header, Logo, Books, Logout, Container_Search, Input_Search, Button_Search, Img_Search, Button_Preferences, Img_Preferences, Container_Modals, Modals, Header_Modal, Close, Img_Close, Button_Container, Button_Category, Text_Select, Text_Category, Filtrar, Text_Filter } from './styles';
 import Cards from '../../card_book/card_book';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
@@ -34,8 +34,7 @@ function Home() {
     scienceFiction: false
   });
 
-  const [isLoading, setLoading] = useState(false)
-
+  const [isLoading, setLoading] = useState(true)
   const [modalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState('');
   const dispatch = useAppDispatch();
@@ -44,11 +43,20 @@ function Home() {
     setLoading(true)
     setModalVisible(!modalVisible);
 
-    try{
-      await dispatch(FetchBooks(category));
-    } catch(error) {
-      console.log("Error")
+    if(category != '') {
+      try{
+        await dispatch(FetchBooks(category));
+      } catch(error) {
+        console.log("Error")
+      }
+    } else {
+      try{
+        await dispatch(FetchBooks());
+      } catch(error) {
+        console.log("Error")
+      }
     }
+
 }
 
   return (
@@ -76,12 +84,12 @@ function Home() {
               <Text_Select>Selecione a categoria</Text_Select>
               
               <Button_Container>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, biographies: !stateBtn.biographies}), setCategory('biographies')}}><Button_Category selected={stateBtn.biographies}><Text_Category selected={stateBtn.biographies}>Biografias</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, manuscripts: !stateBtn.manuscripts}), setCategory('manuscripts')}}><Button_Category selected={stateBtn.manuscripts}><Text_Category selected={stateBtn.manuscripts}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, poetry: !stateBtn.poetry}), setCategory('poetry')}}><Button_Category selected={stateBtn.poetry}><Text_Category selected={stateBtn.poetry}>Poesia</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, humor: !stateBtn.humor}), setCategory('humor')}}><Button_Category selected={stateBtn.humor}><Text_Category selected={stateBtn.humor}>Humor</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, games: !stateBtn.games}), setCategory('games')}}><Button_Category selected={stateBtn.games}><Text_Category selected={stateBtn.games}>Games</Text_Category></Button_Category></TouchableOpacity>
-                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, scienceFiction: !stateBtn.scienceFiction}), setCategory('scienceFiction')}}><Button_Category selected={stateBtn.scienceFiction}><Text_Category selected={stateBtn.scienceFiction}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, biographies: !stateBtn.biographies}), !stateBtn.biographies ? setCategory('biographies') : setCategory('')}}><Button_Category selected={stateBtn.biographies}><Text_Category selected={stateBtn.biographies}>Biografias</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, manuscripts: !stateBtn.manuscripts}), !stateBtn.manuscripts ? setCategory('manuscripts') : setCategory('')}}><Button_Category selected={stateBtn.manuscripts}><Text_Category selected={stateBtn.manuscripts}>Manuscritos</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, poetry: !stateBtn.poetry}), !stateBtn.poetry ? setCategory('poetry') : setCategory('')}}><Button_Category selected={stateBtn.poetry}><Text_Category selected={stateBtn.poetry}>Poesia</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, humor: !stateBtn.humor}), !stateBtn.humor ? setCategory('humor') : setCategory('')}}><Button_Category selected={stateBtn.humor}><Text_Category selected={stateBtn.humor}>Humor</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, games: !stateBtn.games}), !stateBtn.games ? setCategory('games') : setCategory('')}}><Button_Category selected={stateBtn.games}><Text_Category selected={stateBtn.games}>Games</Text_Category></Button_Category></TouchableOpacity>
+                <TouchableOpacity onPress={()=> {setStateBtn({...initial_value, scienceFiction: !stateBtn.scienceFiction}), !stateBtn.scienceFiction ? setCategory('scienceFiction') : setCategory('')}}><Button_Category selected={stateBtn.scienceFiction}><Text_Category selected={stateBtn.scienceFiction}>Ficção Científica</Text_Category></Button_Category></TouchableOpacity>
               </Button_Container>
 
               <Text_Select>Selecione o ano</Text_Select>
@@ -145,7 +153,7 @@ function Home() {
               <Cards key={index} book={value}/>
             );
           })
-          : null
+          : <ActivityIndicator size="large" />
         }
 
       </Container>
