@@ -1,51 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, ScrollView, Modal, TouchableOpacity } from 'react-native';
-import {
-  Container,
-  Header,
-  Logo,
-  Books,
-  Logout,
-  Container_Search,
-  Input_Search,
-  Button_Search,
-  Img_Search,
-  Button_Preferences,
-  Img_Preferences,
-  Container_Modals,
-  Modals,
-  Header_Modal,
-  Close,
-  Img_Close,
-  Button_Container,
-  Button_Category,
-  Text_Select,
-  Text_Category,
-  Filtrar,
-  Text_Filter
-
-} from './styles';
+import { Container, Header, Logo, Books, Logout, Container_Search, Input_Search, Button_Search, Img_Search, Button_Preferences, Img_Preferences, Container_Modals, Modals, Header_Modal, Close, Img_Close, Button_Container, Button_Category, Text_Select, Text_Category, Filtrar, Text_Filter } from './styles';
 import Cards from '../../card_book/card_book';
-import { Fetch_Books } from '../../services/get_books';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
 import { useAppDispatch } from '../../redux/hooks_store/hooks';
-import { addBook } from "../../redux/reducers/addBooks";
 import images from "../../../assets/images";
-import { FetchBooks } from '../../redux/actions/actions'
+import { ModelBooks, ModelCategory, Container_Book } from '../../models/models'
 
 function Home() {
 
-  const dispatch = useAppDispatch();
+  // useEffect(() => {    
 
-  useEffect(() => {    
-    // getBooks('');
-    dispatch(FetchBooks('scs'));
-  }, []);
+  // }, []);
+
+  // const users = useAppSelector((state) => state.user)
+  // console.log(users)
 
   const books = useAppSelector((state) => state.books)
 
-  console.log(books)
-  
   // async function getBooks(category?: string) {
   //   await Fetch_Books(token, category)
   //   .then(value => {
@@ -63,16 +35,7 @@ function Home() {
   //   })
   // }
 
-  type State = {
-    biographies: boolean,
-    manuscripts: boolean,
-    poetry: boolean,
-    humor: boolean,
-    games: boolean,
-    scienceFiction: boolean,
-  }
-
-  const initial_value: State = {
+  const initial_value: ModelCategory = {
     biographies: false,
     manuscripts: false,
     poetry: false,
@@ -81,7 +44,7 @@ function Home() {
     scienceFiction: false,
   }
 
-  const [stateBtn, setStateBtn] = useState<State>({
+  const [stateBtn, setStateBtn] = useState<ModelCategory>({
     biographies: false,
     manuscripts: false,
     poetry: false,
@@ -90,10 +53,6 @@ function Home() {
     scienceFiction: false
   });
 
-  // TOKEN GET REQUEST HEADER AUTHORIZATION
-  const token = useAppSelector((state) => state.userToken.value)
-
-  const [data, setData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
   const [category, setCategory] = useState('');
@@ -101,21 +60,6 @@ function Home() {
   function filter() {
     setModalVisible(!modalVisible);
     // getBooks(category);
-  }
-
-  interface Container_Book{
-    id?: string;
-    isbn10?: string;
-    isbn13?: string;
-    imageUrl?: string;
-    authors?: [];
-    title?: string
-    category?: string;
-    description?: string;
-    language?: string;
-    pageCount?: string;
-    published?: string;
-    publisher?: string;
   }
 
   return (
@@ -205,11 +149,15 @@ function Home() {
 
         </Container_Search>
 
-        {/* {books?.map((value: Container_Book, index) => {
-          return (
-            <Cards key={index} book={value}/>
-          );
-        })} */}
+        {books ?
+
+          books.books?.map((value: Container_Book, index) => {
+            return (
+              <Cards key={index} book={value}/>
+            );
+          })
+
+        : null}
 
       </Container>
     </ScrollView>

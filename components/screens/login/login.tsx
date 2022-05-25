@@ -1,32 +1,16 @@
 import React, { useState } from "react";
-import { View } from 'react-native';
-import { getToken } from '../../services/login_request';
+import { View, ImageBackground, StyleSheet } from 'react-native';
 import { useAppDispatch } from '../../redux/hooks_store/hooks'
 import images from "../../../assets/images"; 
-import { add } from "../../redux/reducers/addUser";
 import { useNavigation } from '@react-navigation/native';
 import { HomeScreenProp } from '../routes/typesScreen';
-import { 
-    Container,
-    Background,
-    Card,
-    Header,
-    Books,
-    Logo,
-    Input,
-    Label,
-    Button,
-    Text
-} from './styles';
+import { LoginModel } from "../../models/models";
+import { Container, Card, Header, Books, Logo, Input, Label, Button, Text} from './styles';
+import { FetchLogin, FetchBooks } from "../../redux/actions/actions";
 
 function Login() {
 
-    interface Login {
-        email: string,
-        password: string,
-    }
-
-    const [login, setLogin] = useState<Login>({
+    const [login, setLogin] = useState<LoginModel>({
         email: '',
         password: '',
     });
@@ -35,14 +19,18 @@ function Login() {
     const dispatch = useAppDispatch();
 
     async function submit() {
-        let value = await getToken(login);
-        dispatch(add(value));
-        navigation.navigate('Home');
+        try{
+            await dispatch(FetchLogin(login))
+            await dispatch(FetchBooks());
+            navigation.navigate('Home');
+        } catch(error) {
+            console.log("Error")
+        }
     }
 
     return (
         <Container>
-            <Background source={images.background}>
+            <ImageBackground style={styles.Background} source={images.background}>
                 <Card>
                     <Header>
                         <Logo source={images.logo_login} resizeMode='contain' />
@@ -84,9 +72,19 @@ function Login() {
                         </Button>
                     </View>
                 </Card>
-        </Background>    
-    </Container>
-  );
+            </ImageBackground>    
+        </Container>
+    );
 }
 
 export default Login;
+
+const styles = StyleSheet.create ({
+    Background: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'cover',
+        alignSelf: 'stretch',
+    }
+})

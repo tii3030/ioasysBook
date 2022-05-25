@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import addToken from  '../reducers/addUser';
+import addUser from  '../reducers/addUser';
 import addBook from  '../reducers/addBooks';
+import addBookId from  '../reducers/addBookId';
 
 export const store = configureStore({
     reducer: {
-        userToken: addToken,
+        user: addUser,
         books: addBook,
+        bookId: addBookId,
     },
 })
 

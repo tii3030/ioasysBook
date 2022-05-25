@@ -4,14 +4,6 @@ export const Container = styled.SafeAreaView`
     flex: 1;
 `;
 
-export const Background = styled.ImageBackground`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    resize-mode: cover;
-    align-self: stretch;
-`;
-
 export const Card = styled.View`
     width: 288px;
 `;

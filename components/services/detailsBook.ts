@@ -1,6 +1,8 @@
-export async function DetailsBook(id: string, token: string) : Promise<any> {
+import { ModelBookId } from "../models/models";
 
-    let resp: {} = {};
+export async function getApiBookId(id: string, token: string) {
+
+    let resp: ModelBookId = {book: {}};
 
     await fetch('https://books.ioasys.com.br/api/v1/books/' + id, {
         method: 'GET',
@@ -11,7 +13,7 @@ export async function DetailsBook(id: string, token: string) : Promise<any> {
     })
     .then(response => response.json())
     .then((response) => {
-        resp = response;
+        resp = ({ book: response });
     })
     .catch(err => console.log(err))
 

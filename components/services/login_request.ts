@@ -1,12 +1,18 @@
-interface Login {
-    email: string,
-    password: string,
-}
+import { UserModel, LoginModel } from '../models/models'
 
-export async function getToken(login: Login) : Promise<any> {
+export async function getApiLogin(login: LoginModel) {
 
-    let resp: string = '';
-    
+    let resp: UserModel = {
+        Authorization: '',
+        User: {
+            birthdate: '',
+            email: '',
+            gender: '',
+            id: '',
+            name: ''
+        }
+    };
+
     await fetch('https://books.ioasys.com.br/api/v1/auth/sign-in', {
         method: 'POST',
         mode: 'no-cors', // DISABLE CORS
@@ -20,13 +26,15 @@ export async function getToken(login: Login) : Promise<any> {
             password: '12341234'
         })
     })
-    .then((response) => {
-        resp = (response.headers.get('Authorization') || '');
+
+    .then(response => response.json().then(User => ({
+        Authorization: response.headers.get('Authorization') || '',
+        User
+    })))
+    .then(result => {
+        resp = result
     })
-    // .then(response => response.json())
-    // .then((response) => {
-    //     console.log(response);
-    // })
+
     .catch(err => console.log(err))
 
     return resp;

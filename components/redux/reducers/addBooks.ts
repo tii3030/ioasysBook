@@ -1,17 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store/store'
-// import { ModelBooks } from '../models/models';
+import { ModelBooks } from '../../models/models';
 
-export type ModelBooks = ""
-
-const initialState: string = ""
+const initialState: ModelBooks = {
+    books: [
+		{
+			authors: [],
+			category: '',
+			description: '',
+			id: '',
+			imageUrl: '',
+			isbn10: '',
+			isbn13: '',
+			language: '',
+			pageCount: 0,
+			published: 0,
+			publisher: '',
+			title: ''
+		}
+    ]
+}
 
 export const BookSlice = createSlice({
   name: 'addBook',
   initialState,
   reducers: {
-        addBook: (state, action: PayloadAction<string>) => {
-            state = (action.payload)
+        addBook: (state, action: PayloadAction<ModelBooks>) => {
+            state.books = (action.payload.books)
         },
     },
 })

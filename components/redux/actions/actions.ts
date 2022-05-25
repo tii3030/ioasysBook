@@ -1,20 +1,27 @@
-import { AnyAction } from "@reduxjs/toolkit";
-import { ThunkAction } from "@reduxjs/toolkit";
-import {addBook} from '../reducers/addBooks'
-import { RootState } from "../store/store";
-import { ModelBooks } from '../models/models';
-import { getAllBooks } from '../../services/services'
-
-// export const FetchBooks = (): ThunkAction<void, RootState, unknown, AnyAction> => {
-//     return async (dispatch, getState) => {
-//         const response: string = await getAllBooks();
-//         dispatch(addBook("Teste"));
-//     }
-// }
+import { AnyAction } from "@reduxjs/toolkit"
+import { ThunkAction } from "@reduxjs/toolkit"
+import { addBook } from '../reducers/addBooks'
+import { addUser } from '../reducers/addUser'
+import { addBookId } from '../reducers/addBookId'
+import { RootState } from "../store/store"
+import { ModelBooks, UserModel, LoginModel, ModelBookId } from '../../models/models'
+import { submitLogin, getAllBooks, getBookId } from '../../services/services'
 
 
-export const FetchBooks = (message: string): ThunkAction<void, RootState, unknown, AnyAction> =>
+export const FetchLogin = (login: LoginModel): ThunkAction<void, RootState, unknown, AnyAction> =>
     async dispatch => {
-        const response: string = await getAllBooks();
-        dispatch(addBook("Teste"));
+        const response: UserModel = await submitLogin(login);
+        dispatch(addUser(response));
+    }
+    
+export const FetchBooks = (): ThunkAction<void, RootState, unknown, AnyAction> =>
+    async (dispatch, getState) => {
+        const response: ModelBooks = await getAllBooks(getState().user.Authorization);
+        dispatch(addBook(response));
+    }
+
+export const FetchBookId = (id: string): ThunkAction<void, RootState, unknown, AnyAction> =>
+    async (dispatch, getState) => {
+        const response: ModelBookId = await getBookId(id, getState().user.Authorization);
+        dispatch(addBookId(response));
     }

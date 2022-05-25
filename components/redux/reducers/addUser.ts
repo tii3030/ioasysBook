@@ -1,24 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store/store'
+import { UserModel } from '../../models/models'
 
-interface UserState {
-    value: string
-}
-
-const initialState: UserState = {
-    value: ''
+const initialState: UserModel = {
+    Authorization: '',
+    User: {
+        birthdate: '',
+        email: '',
+        gender: '',
+        id: '',
+        name: ''
+    }
 }
 
 export const userSlice = createSlice({
-  name: 'addToken',
-  initialState,
-  reducers: {
-        add: (state, action: PayloadAction<string>) => {
-            state.value = action.payload
+    name: 'addUser',
+    initialState,
+    reducers: {
+        addUser: (state, action: PayloadAction<UserModel>) => {
+            state.Authorization = action.payload.Authorization
+            state.User = action.payload.User
         },
     },
 })
 
-export const { add } = userSlice.actions
-export const selectUser = (state: RootState) => state.userToken.value
+export const { addUser } = userSlice.actions
+export const selectUser = (state: RootState) => state.user
 export default userSlice.reducer

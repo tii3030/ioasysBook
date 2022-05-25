@@ -1,49 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
-import { Container, Header, Logout, Img_Book, Title, Author, Info } from './styles';
-import { TouchableOpacity } from "react-native-gesture-handler";
-import images from "../../../assets/images";
-import { useAppSelector } from '../../redux/hooks_store/hooks';
+import React, { useEffect, useState } from "react"
+import { StyleSheet, View, ScrollView, Image } from 'react-native'
+import { Container, Header, Logout, Img_Book, Title, Author, Info } from './styles'
+import { TouchableOpacity } from "react-native-gesture-handler"
+import images from "../../../assets/images"
+import { useAppSelector } from '../../redux/hooks_store/hooks'
 
 function Details({ route, navigation }: any) {
 
-  // TOKEN GET REQUEST HEADER AUTHORIZATION
-  const book = useAppSelector((state) => state.books.book)
-  console.log(book)
-
-  interface Container_Detail{
-    id?: string;
-    isbn10?: string;
-    isbn13?: string;
-    imageUrl: string;
-    authors?: [];
-    title?: string
-    category?: string;
-    description?: string;
-    language?: string;
-    pageCount?: string;
-    published?: string;
-    publisher?: string;
-  }
-
-  const [book_detail, setBook_detail] = useState<Container_Detail>({
-    id: '',
-    isbn10: '',
-    isbn13: '',
-    imageUrl: '',
-    authors: [],
-    title: '',
-    category: '',
-    description: '',
-    language: '',
-    pageCount: '',
-    published: '',
-    publisher: '',
-  });
-
-  useEffect(() => {   
-    setBook_detail(route.params.data); 
-  }, []);
+  // BOOK IN STORE
+  const book = useAppSelector((state) => state.bookId.book)
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -57,9 +22,9 @@ function Details({ route, navigation }: any) {
           </TouchableOpacity> 
         </Header> 
 
-        <Img_Book source={{uri: book_detail.imageUrl}} style={styles.shadow}/>
-        <Title>{book_detail.title}</Title>
-        <Author>{book_detail.title}</Author>
+        <Img_Book source={{uri: book.imageUrl || 'https://d2drtqy2ezsot0.cloudfront.net/Book-7.jpg'}}/>
+        <Title>{book.title}</Title>
+        <Author>{book.title}</Author>
 
         <Info style={{marginBottom: 10}}>Informações</Info>
         <View style={{flexDirection: 'row'}}>
@@ -75,19 +40,19 @@ function Details({ route, navigation }: any) {
           </View>
 
           <View style={{flexDirection: 'column', flex: 2, alignItems: 'flex-end', marginBottom: 17}}>
-            <Info style={{color: "#999999"}}>{book_detail.pageCount} páginas</Info>
-            <Info style={{color: "#999999"}}>Editora {book_detail.publisher}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.published}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.language}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.title}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.isbn10}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.isbn13}</Info>
-            <Info style={{color: "#999999"}}>{book_detail.category}</Info>
+            <Info style={{color: "#999999"}}>{book.pageCount} páginas</Info>
+            <Info style={{color: "#999999"}}>Editora {book.publisher}</Info>
+            <Info style={{color: "#999999"}}>{book.published}</Info>
+            <Info style={{color: "#999999"}}>{book.language}</Info>
+            <Info style={{color: "#999999"}}>{book.title}</Info>
+            <Info style={{color: "#999999"}}>{book.isbn10}</Info>
+            <Info style={{color: "#999999"}}>{book.isbn13}</Info>
+            <Info style={{color: "#999999"}}>{book.category}</Info>
           </View>
         </View>
 
         <Info style={{marginBottom: 10}}>RESENHA DA EDITORA</Info>
-        <Info style={{color: "#999999", textAlign: 'justify'}}>{book_detail.description}</Info>
+        <Info style={{color: "#999999", textAlign: 'justify'}}>{book.description}</Info>
 
       </Container>
     </ScrollView>
@@ -109,3 +74,4 @@ const styles = StyleSheet.create({
   }
 });
     
+// style={styles.shadow}
