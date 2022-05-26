@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, ImageBackground, StyleSheet } from 'react-native';
 import { useAppDispatch } from '../../redux/hooks_store/hooks'
-import images from "../../../assets/images"; 
+import images from "../../assets/images"; 
 import { useNavigation } from '@react-navigation/native';
 import { HomeScreenProp } from '../routes/typesScreen';
 import { LoginModel } from "../../models/models";

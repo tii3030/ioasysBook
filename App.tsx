@@ -1,8 +1,8 @@
 import React from 'react';
-import Routes from './src/components/screens/routes/routes';
+import Routes from './src/screens/routes/routes';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import { store } from './src/components/redux/store/store';
+import { store } from './src/redux/store/store';
 
 const App = () => {
 

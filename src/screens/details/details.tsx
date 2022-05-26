@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { StyleSheet, View, ScrollView, Image } from 'react-native'
 import { Container, Header, Logout, Img_Book, Title, Author, Info } from './styles'
 import { TouchableOpacity } from "react-native-gesture-handler"
-import images from "../../../assets/images"
+import images from "../../assets/images"
 import { useAppSelector } from '../../redux/hooks_store/hooks'
 
 function Details({ route, navigation }: any) {

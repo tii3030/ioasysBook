@@ -1,20 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, ScrollView, Modal, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Container, Header, Logo, Books, Logout, Container_Search, Input_Search, Button_Search, Img_Search, Button_Preferences, Img_Preferences, Container_Modals, Modals, Header_Modal, Close, Img_Close, Button_Container, Button_Category, Text_Select, Text_Category, Filtrar, Text_Filter } from './styles';
-import Cards from '../../card_book/card_book';
+import Cards from '../../components/card_book/card_book';
 import { useAppSelector } from '../../redux/hooks_store/hooks';
 import { useAppDispatch } from '../../redux/hooks_store/hooks';
-import images from "../../../assets/images";
-import { ModelCategory, ModelYear, Container_Book } from '../../models/models'
+import images from "../../assets/images";
+import { ModelCategory, ModelYear, Container_Book, ModelBooks } from '../../models/models'
 import { FetchBooks } from "../../redux/actions/actions";
 
 function Home() {
 
-  const books = useAppSelector((state) => state.books)
+  const booksState = useAppSelector((state) => state.books)
+  const [ books, setBooks ] = useState<ModelBooks>({
+    books: [{
+      authors: [],
+      category: '',
+      description: '',
+      id: '',
+      imageUrl: '',
+      isbn10: '',
+      isbn13: '',
+      language: '',
+      pageCount: 0,
+      published: 0,
+      publisher: '',
+      title: ''
+    }]
+  })
 
-  useEffect(() => {    
+  const [search, setSearch] = useState({
+    value: '',
+  });
+
+  useEffect(() => {
+    setBooks(booksState);
     setLoading(false)
-  }, [books]);
+  }, [booksState]);
   
   const init_cat: ModelCategory = {
     biographies: false,
@@ -87,6 +108,23 @@ function Home() {
     // console.log(books.books)
   }
 
+  function BooksSearch(str: string) {
+
+    let result = books?.books.filter(obj => {
+      return obj?.publisher?.startsWith(str) || obj?.title?.startsWith(str)
+    })
+
+    // let my = {books: result}
+    // console.log(my)
+
+    // console.log(result)
+    // setBooks(...books, {books: result})
+  }
+
+  useEffect(() => {
+    BooksSearch(search.value)
+  }, [search]);
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
@@ -156,8 +194,8 @@ function Home() {
               <Input_Search
                 autoCapitalize='none'
                 autoCorrect={false}
-                // onChangeText={(password) => setLogin({...login, password: password})}
-                // value={login.password}
+                onChangeText={(str) => setSearch({...search, value: str})}
+                value={search.value}
                 accessibilityLabel={ 'Pesquisa' }
                 returnKeyType="done"
                 placeholder="Pesquise um livro"
@@ -175,7 +213,7 @@ function Home() {
         </Container_Search>
 
         {
-          !isLoading ?
+          !isLoading && books ?
           books.books?.map((value: Container_Book, index) => {
             return (
               <Cards key={index} book={value}/>
