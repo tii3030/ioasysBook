@@ -11,22 +11,7 @@ import { FetchBooks } from "../../redux/actions/actions";
 function Home() {
 
   const booksState = useAppSelector((state) => state.books)
-  const [ books, setBooks ] = useState<ModelBooks>({
-    books: [{
-      authors: [],
-      category: '',
-      description: '',
-      id: '',
-      imageUrl: '',
-      isbn10: '',
-      isbn13: '',
-      language: '',
-      pageCount: 0,
-      published: 0,
-      publisher: '',
-      title: ''
-    }]
-  })
+  const [ books, setBooks ] = useState<ModelBooks>()
 
   const [search, setSearch] = useState({
     value: '',
@@ -110,15 +95,23 @@ function Home() {
 
   function BooksSearch(str: string) {
 
-    let result = books?.books.filter(obj => {
-      return obj?.publisher?.startsWith(str) || obj?.title?.startsWith(str)
-    })
+    setBooks((prev: Md) => {
+      let result = books?.books.filter((obj)  => {
+        return obj.publisher?.startsWith(str) || obj.title?.startsWith(str)
+      })
+      return result
+    });
 
-    // let my = {books: result}
-    // console.log(my)
+    // let result
 
-    // console.log(result)
-    // setBooks(...books, {books: result})
+    // result = booksState?.books.filter((obj)  => {
+    //   return obj.publisher?.startsWith(str) || obj.title?.startsWith(str)
+    // })
+
+    // let toSet: ModelBooks = { books: [{}] };
+    // toSet = ({books: result});
+
+    // setBooks(toSet)
   }
 
   useEffect(() => {
