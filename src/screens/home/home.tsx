@@ -95,12 +95,12 @@ function Home() {
 
   function BooksSearch(str: string) {
 
-    setBooks((prev: Md) => {
-      let result = books?.books.filter((obj)  => {
-        return obj.publisher?.startsWith(str) || obj.title?.startsWith(str)
-      })
-      return result
-    });
+    // setBooks((prev: Md) => {
+    //   let result = books?.books.filter((obj)  => {
+    //     return obj.publisher?.startsWith(str) || obj.title?.startsWith(str)
+    //   })
+    //   return result
+    // });
 
     // let result
 
